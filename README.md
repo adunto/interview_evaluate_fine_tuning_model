@@ -1,2 +1,66 @@
 # interview_evaluate_fine_tuning_model
+
 면접 답변 평가 모델 파인 튜닝 학습 llama3
+
+---
+
+base_model: meta-llama/Llama-3.1-8B-Instruct
+library_name: transformers
+model_name: llama_interview_model
+tags:
+
+- generated_from_trainer
+- trl
+- sft
+  licence: license
+
+---
+
+# Model Card for llama_interview_model
+
+This model is a fine-tuned version of [meta-llama/Llama-3.1-8B-Instruct](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct).
+It has been trained using [TRL](https://github.com/huggingface/trl).
+
+## Quick start
+
+```python
+from transformers import pipeline
+
+question = "If you had a time machine, but could only go to the past or the future once and never return, which would you choose and why?"
+generator = pipeline("text-generation", model="None", device="cuda")
+output = generator([{"role": "user", "content": question}], max_new_tokens=128, return_full_text=False)[0]
+print(output["generated_text"])
+```
+
+## Training procedure
+
+[<img src="https://raw.githubusercontent.com/wandb/assets/main/wandb-github-badge-28.svg" alt="Visualize in Weights & Biases" width="150" height="24"/>](https://wandb.ai/sogno6037-university-of-ulsan/huggingface/runs/g2q9s62h)
+
+This model was trained with SFT.
+
+### Framework versions
+
+- TRL: 0.21.0
+- Transformers: 4.55.4
+- Pytorch: 2.6.0+cu124
+- Datasets: 4.0.0
+- Tokenizers: 0.21.2
+
+## Citations
+
+Cite TRL as:
+
+```bibtex
+@misc{vonwerra2022trl,
+	title        = {{TRL: Transformer Reinforcement Learning}},
+	author       = {Leandro von Werra and Younes Belkada and Lewis Tunstall and Edward Beeching and Tristan Thrush and Nathan Lambert and Shengyi Huang and Kashif Rasul and Quentin Gallou{\'e}dec},
+	year         = 2020,
+	journal      = {GitHub repository},
+	publisher    = {GitHub},
+	howpublished = {\url{https://github.com/huggingface/trl}}
+}
+```
+
+training result:
+
+[<img src="output.png" alt="training result" width="600" height="400"/>](output.png)
