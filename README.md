@@ -1,5 +1,8 @@
 # interview_evaluate_fine_tuning_model
 
+*데이터셋*
+https://github.com/adunto/generate_llm_dataset.git
+
 면접 답변 평가 모델 파인 튜닝 학습 llama3
 
 ---
